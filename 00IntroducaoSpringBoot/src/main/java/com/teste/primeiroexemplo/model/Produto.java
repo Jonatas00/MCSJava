@@ -1,12 +1,17 @@
-package com.teste.primeiroexemplo.models;
+package com.teste.primeiroexemplo.model;
 
 public class Produto {
+
+  //#region Atributos
   private Integer id;
   private String nome;
   private Integer quantidade;
   private Double valor;
   private String descricao;
-  
+  //#endregion
+
+  //#region Getters and setters
+
   public Integer getId() {
     return id;
   }
@@ -37,6 +42,7 @@ public class Produto {
   public void setDescricao(String descricao) {
     this.descricao = descricao;
   }
+  //#endregion
 
-  
+
 }
