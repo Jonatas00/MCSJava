@@ -1,3 +1,5 @@
 Objetivo:
 
 Criar uma API Restful para controle de produtos
+
+Produto: id, nome, quantidade, valor, descricao
