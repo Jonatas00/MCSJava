@@ -1,0 +1,3 @@
+Objetivo:
+
+Criar uma API Restful para controle de produtos
