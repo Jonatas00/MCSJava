@@ -1,4 +1,4 @@
-package com.teste.introducaospringboot.model;
+package com.teste.introducaospringboot.models;
 
 public class Produto {
   //#region Atributos
