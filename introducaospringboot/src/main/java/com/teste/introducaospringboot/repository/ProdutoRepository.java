@@ -7,7 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import com.teste.introducaospringboot.model.Produto;
+import com.teste.introducaospringboot.models.Produto;
 
 @Repository
 public class ProdutoRepository {
