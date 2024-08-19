@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.teste.introducaospringboot.models.Cliente;
 import com.teste.introducaospringboot.services.ClienteService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @RequestMapping("/api/clientes")
@@ -35,6 +37,11 @@ public class ClienteController {
   @GetMapping("/{id}")
   public Optional<Cliente> buscarPorId(@PathVariable Integer id) {
     return clienteService.buscarPorId(id);
+  }
+
+  @PutMapping("/{id}")
+  public Cliente putMethodName(@PathVariable Integer id, @RequestBody Cliente cliente) {
+    return clienteService.atualizar(id, cliente);
   }
   
   @DeleteMapping("/{id}")
