@@ -7,14 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teste.introducaospringboot.models.Produto;
-import com.teste.introducaospringboot.repository.ProdutoRepository;
+import com.teste.introducaospringboot.repository.ProdutoRepository_old;
 
 @Service
 public class ProdutoService {
   
   /* @Autowired devolve instância pronta do repositorio */
   @Autowired
-  private ProdutoRepository produtoRepository;
+  private ProdutoRepository_old produtoRepository;
 
   /**
    * Metodo para retornar uma lista de produtos.
