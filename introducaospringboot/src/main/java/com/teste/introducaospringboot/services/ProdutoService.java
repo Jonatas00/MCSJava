@@ -7,21 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teste.introducaospringboot.models.Produto;
-import com.teste.introducaospringboot.repository.ProdutoRepository_old;
+import com.teste.introducaospringboot.repository.ProdutoRepository;
 
 @Service
 public class ProdutoService {
   
   /* @Autowired devolve instância pronta do repositorio */
   @Autowired
-  private ProdutoRepository_old produtoRepository;
-
-  /**
+  private ProdutoRepository produtoRepository;
+  
+  /*
    * Metodo para retornar uma lista de produtos.
    * @return Lista de produtos.
    */
   public List<Produto> obterTodos() {
-    return produtoRepository.obterTodos();
+    return produtoRepository.findAll();
   }
 
   /**
@@ -30,7 +30,7 @@ public class ProdutoService {
    * @return Retorna um produto caso tenha encontrado.
    */
   public Optional<Produto> obterPorId(Integer id) {
-    return produtoRepository.obterPorId(id);
+    return produtoRepository.findById(id);
   }
 
   /**
@@ -39,7 +39,7 @@ public class ProdutoService {
    * @return produto que foi adicionado na lista.
    */
   public Produto adicionar(Produto produto) {
-    return produtoRepository.adicionar(produto);
+    return produtoRepository.save(produto);
   }
 
   /**
@@ -47,7 +47,7 @@ public class ProdutoService {
    * @param id que sera removido.
    */
   public void deletar(Integer id) {
-    produtoRepository.deletar(id);
+    produtoRepository.deleteById(id);
   }
 
   /**
@@ -58,6 +58,6 @@ public class ProdutoService {
    */
   public Produto atualizar(Integer id, Produto produto) {
     produto.setId(id);
-    return produtoRepository.atualizar(produto);
+    return produtoRepository.save(produto);
   }
 }

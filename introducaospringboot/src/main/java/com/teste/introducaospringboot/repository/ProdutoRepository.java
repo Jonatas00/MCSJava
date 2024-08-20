@@ -7,6 +7,5 @@ import com.teste.introducaospringboot.models.Produto;
 
 @Repository
 public interface ProdutoRepository extends JpaRepository<Produto, Integer> {
-
   
 }
