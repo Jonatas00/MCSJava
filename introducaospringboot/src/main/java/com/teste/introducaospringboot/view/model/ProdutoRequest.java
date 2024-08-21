@@ -1,31 +1,13 @@
-package com.teste.introducaospringboot.models;
+package com.teste.introducaospringboot.view.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.teste.introducaospringboot.shared.ProdutoDTO;
 
-@Entity
-public class Produto {
-
-  //#region Atributos
-  @Id // Primary Key
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
-
+public class ProdutoRequest extends ProdutoDTO {
   private String nome;
   private Integer quantidade;
   private Double valor;
   private String descricao;
-  //#endregion
-  
-  //#region Getters e Setters
-  public Integer getId() {
-    return id;
-  }
-  public void setId(Integer id) {
-    this.id = id;
-  }
+
   public String getNome() {
     return nome;
   }
@@ -50,6 +32,4 @@ public class Produto {
   public void setDescricao(String descricao) {
     this.descricao = descricao;
   }
-  //#endregion
-    
 }

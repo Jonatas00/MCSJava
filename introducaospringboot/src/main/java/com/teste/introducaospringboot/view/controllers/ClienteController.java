@@ -1,4 +1,4 @@
-package com.teste.introducaospringboot.controllers;
+package com.teste.introducaospringboot.view.controllers;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.teste.introducaospringboot.models.Cliente;
+import com.teste.introducaospringboot.models.schema.Cliente;
 import com.teste.introducaospringboot.services.ClienteService;
 import org.springframework.web.bind.annotation.PutMapping;
 

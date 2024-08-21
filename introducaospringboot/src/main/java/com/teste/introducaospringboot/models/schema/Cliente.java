@@ -1,4 +1,4 @@
-package com.teste.introducaospringboot.models;
+package com.teste.introducaospringboot.models.schema;
 
 public class Cliente {
   //#region atributos

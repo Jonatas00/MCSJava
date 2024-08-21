@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.teste.introducaospringboot.models.Cliente;
+import com.teste.introducaospringboot.models.schema.Cliente;
 import com.teste.introducaospringboot.repository.ClienteRepository;
 
 @Service

@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import com.teste.introducaospringboot.models.schema.Cliente;
 
-import com.teste.introducaospringboot.models.Cliente;
+import java.util.ArrayList;
 
 @Repository
 public class ClienteRepository {

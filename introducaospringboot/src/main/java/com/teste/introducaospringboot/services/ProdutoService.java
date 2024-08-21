@@ -2,12 +2,16 @@ package com.teste.introducaospringboot.services;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.teste.introducaospringboot.models.Produto;
+import com.teste.introducaospringboot.models.exception.ResourceNotFoundException;
+import com.teste.introducaospringboot.models.schema.Produto;
 import com.teste.introducaospringboot.repository.ProdutoRepository;
+import com.teste.introducaospringboot.shared.ProdutoDTO;
 
 @Service
 public class ProdutoService {
@@ -20,8 +24,13 @@ public class ProdutoService {
    * Metodo para retornar uma lista de produtos.
    * @return Lista de produtos.
    */
-  public List<Produto> obterTodos() {
-    return produtoRepository.findAll();
+  public List<ProdutoDTO> obterTodos() {
+
+    List<Produto> produtos = produtoRepository.findAll();
+
+    return produtos.stream()
+    .map(p -> new ModelMapper().map(p, ProdutoDTO.class))
+    .collect(Collectors.toList());
   }
 
   /**
@@ -29,8 +38,15 @@ public class ProdutoService {
    * @param id do produto que sera localizado.
    * @return Retorna um produto caso tenha encontrado.
    */
-  public Optional<Produto> obterPorId(Integer id) {
-    return produtoRepository.findById(id);
+  public Optional<ProdutoDTO> obterPorId(Integer id) {
+    Optional<Produto> produto = produtoRepository.findById(id);
+    if (produto.isEmpty()) {
+      throw new ResourceNotFoundException("Produto com id " + id + " não foi encontrado");
+    }
+
+    ProdutoDTO dto = new ModelMapper().map(produto.get(), ProdutoDTO.class);
+
+    return Optional.of(dto);
   }
 
   /**
@@ -38,8 +54,18 @@ public class ProdutoService {
    * @param produto que sera adicionado.
    * @return produto que foi adicionado na lista.
    */
-  public Produto adicionar(Produto produto) {
-    return produtoRepository.save(produto);
+  public ProdutoDTO adicionar(ProdutoDTO produtodto) {
+    produtodto.setId(null);
+
+    ModelMapper mapper = new ModelMapper();
+
+    Produto produto = mapper.map(produtodto, Produto.class);
+    
+    produto = produtoRepository.save(produto);
+
+    produtodto.setId(produto.getId());
+
+    return produtodto;
   }
 
   /**
@@ -47,6 +73,10 @@ public class ProdutoService {
    * @param id que sera removido.
    */
   public void deletar(Integer id) {
+    Optional<Produto> produto = produtoRepository.findById(id);
+    if (produto.isEmpty()) {
+      throw new ResourceNotFoundException("Não foi possível deletar o produto com o id: " + id + " produto não existe");
+    }
     produtoRepository.deleteById(id);
   }
 
@@ -56,8 +86,15 @@ public class ProdutoService {
    * @param produto que sera atualizado.
    * @return produto apos a atualizar a lista.
    */
-  public Produto atualizar(Integer id, Produto produto) {
-    produto.setId(id);
-    return produtoRepository.save(produto);
+  public ProdutoDTO atualizar(Integer id, ProdutoDTO produtodto) {
+    produtodto.setId(id);
+
+    ModelMapper mapper = new ModelMapper();
+
+    Produto produto = mapper.map(produtodto, Produto.class);
+
+    produtoRepository.save(produto);
+
+    return produtodto;
   }
 }
