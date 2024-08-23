@@ -1,5 +1,6 @@
 services:
   database:
+    container_name: banco_lojinha
     image: postgres
     ports:
       - "5432:5432"
@@ -8,7 +9,7 @@ services:
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - polls_pg_data:/var/lib/postgresql/data
+      - lojinha:/var/lib/postgresql/data
 
 volumes:
-  polls_pg_data:
+  lojinha: 
