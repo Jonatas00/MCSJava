@@ -1,15 +1,42 @@
-services:
-  database:
-    container_name: banco_lojinha
-    image: postgres
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_DB: ${DB_NAME}
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-    volumes:
-      - lojinha:/var/lib/postgresql/data
+  networks:
+    wire: {}
 
-volumes:
-  lojinha: 
+  services:
+    database:
+      env_file:
+        - .env
+      container_name: ${DB_NAME}
+      image: postgres
+      ports:
+        - "5432:5432"
+      environment:
+        POSTGRES_DB: ${DB_NAME}
+        POSTGRES_USER: ${DB_USERNAME}
+        POSTGRES_PASSWORD: ${DB_PASSWORD}
+      volumes:
+        - lojinha:/var/lib/postgresql/data
+      networks:
+        - wire
+      restart: always
+      healthcheck:
+        test: ["CMD-SHELL", "pg_isready -U ${DB_USERNAME}"]
+        interval: 5s
+        timeout: 2s
+        retries: 3
+    app:
+      env_file:
+        - .env
+      depends_on:
+        database:
+          condition: service_healthy
+      build:
+        context: .
+        dockerfile: Dockerfile
+      ports:
+        - "8080:8080"
+      networks:
+        - wire
+      restart: always
+
+  volumes:
+    lojinha: 
