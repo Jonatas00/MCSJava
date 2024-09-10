@@ -1,0 +1,12 @@
+{
+  "folders": [ 
+    {
+    "name": "eureka-service",
+    "path": "./eureka-service"
+    
+  }
+],
+"settings": {
+  "java.compile.nullAnalysis.mode": "automatic"
+}
+}
